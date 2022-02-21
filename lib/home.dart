@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key, required this.title}) : super(key: key);
@@ -35,14 +36,19 @@ class _HomeState extends State<Home> {
         itemCount: listaRandom.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(listaRandom[index]),
+            onTap: () {
+              Clipboard.setData(ClipboardData(text: (listaRandom[index])));
+            },
+            title: Text(
+              listaRandom[index],
+            ),
           );
         });
   }
 
   _addList() {
     setState(() {
-      listaRandom.add(randomString(10));
+      listaRandom.add(randomString(12));
     });
     print(listaRandom);
   }
